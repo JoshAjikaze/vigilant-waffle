@@ -5,4 +5,10 @@
       <input placeholder="Search Rooms..." name="q" class="border border-black" />
     </form>
   </div>
+
+  {% if request.user.is_authenticated %}
+  <a href="{% url 'logout' %}"  class="[&.active]:font-bold hover:bg-black hover:text-white p-2"  >Logout</a>
+  {% else %}
+  <a href="{% url 'login' %}"  class="[&.active]:font-bold hover:bg-black hover:text-white p-2"  >Login</a>
+  {% endif %}
 </nav>
