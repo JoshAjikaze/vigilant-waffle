@@ -1,29 +1,33 @@
 {% extends "main.html" %} {% block title %}Home{% endblock title %} 
 
 {% block content %}
-<div class="container mx-auto">
-  <h1 class="text-4xl my-10 font-bold">Home Page</h1>
-  <a href="{% url 'create-room' %}">Create Room</a>
-  <div>
-    {% for room in rooms %}
-    <div class="mb-5">
-      <a href="{% url 'update-room' room.id %}">Edit</a>
-      <a href="{% url 'delete-room' room.id %}">Delete</a>
-      <span class="capitalize">@{{ room.host }}</span>
-      <p class="p-3">
-        <a href="{% url 'room' room.id %}">{{ room.name }}</a>
-      </p>
-      <span>@{{ room.topic.name }}</span>
-    </div>
+
+<div class="container mx-auto grid grid-cols-12">
+
+  <div class='col-span-3 border flex flex-col'>
+    <h3>Browse Topics</h3>
+    <a href="{% url 'home' %}">All Topics</a>
+    {% for topic in topics %}
+    <a href="{% url 'home' %}?q={{ topic.name }}">{{ topic.name }}</a>
     {% endfor %}
   </div>
 
-  {% comment %}
-  <div>
-    {% for topic in topics %}
-    <p>{{ topic.name }}</p>
-    {% endfor %}
+  <div class='col-span-9 border'>
+    <h5>{{ room_count }} rooms available</h5><a href="{% url 'create-room' %}">Create Room</a>
+    <div>
+      {% for room in rooms %}
+      <div class="mb-5">
+        <a class="text-sm p-1 hover:text-white hover:bg-black rounded-md" href="{% url 'update-room' room.id %}">Edit</a>
+        <a class="text-sm p-1 hover:text-white hover:bg-black rounded-md" href="{% url 'delete-room' room.id %}">Delete</a>
+        <span class="capitalize font-medium text-xs">@{{ room.host }}</span>
+        <p class="font-medium text-lg">
+          <a href="{% url 'room' room.id %}">{{ room.name }}</a>
+        </p>
+        <span>@{{ room.topic.name }}</span>
+      </div>
+      {% endfor %}
+    </div>
   </div>
-  {% endcomment %}
 </div>
+
 {% endblock content %}
