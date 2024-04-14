@@ -1,0 +1,15 @@
+{% extends "main.html" %} {% block title %}Room{% endblock title %} 
+{% block content %}
+<div class="container mx-auto">
+  <h1 class="text-4xl my-10 font-bold">{{ room.name }}</h1>
+  <div>
+    {% for message in messages %}
+    <div class="my-3">
+      <p>{{ message.user }}</p>
+      <p>{{ message.created|timesince }} ago</p>
+      <p>{{ message.body }}</p>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock content %}
