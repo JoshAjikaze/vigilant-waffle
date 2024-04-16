@@ -1,11 +1,15 @@
 <nav class="flex items-center justify-between p-3">
+  {% if request.user.is_authenticated %}
   <div>
     <a href="{% url 'home' %}"  class="[&.active]:font-bold hover:bg-black hover:text-white p-2"  >Logo</a>
     <form method='GET' action="{% url 'home' %}">
       <input placeholder="Search Rooms..." name="q" class="border border-black" />
     </form>
   </div>
-
+  
+  <h1> Hello <span class="capitalize">{{request.user}}</span> </h1>
+  
+  {% endif %}
   {% if request.user.is_authenticated %}
   <a href="{% url 'logout' %}"  class="[&.active]:font-bold hover:bg-black hover:text-white p-2"  >Logout</a>
   {% else %}

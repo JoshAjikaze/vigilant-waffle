@@ -12,13 +12,17 @@
     {% endfor %}
   </div>
 
+  
+
   <div class='col-span-9 border'>
     <h5>{{ room_count }} rooms available</h5><a href="{% url 'create-room' %}">Create Room</a>
     <div>
       {% for room in rooms %}
       <div class="mb-5">
+        {% if request.user == room.host %}
         <a class="text-sm p-1 hover:text-white hover:bg-black rounded-md" href="{% url 'update-room' room.id %}">Edit</a>
         <a class="text-sm p-1 hover:text-white hover:bg-black rounded-md" href="{% url 'delete-room' room.id %}">Delete</a>
+        {% endif %}
         <span class="capitalize font-medium text-xs">@{{ room.host }}</span>
         <p class="font-medium text-lg">
           <a href="{% url 'room' room.id %}">{{ room.name }}</a>
